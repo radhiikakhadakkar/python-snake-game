@@ -5,6 +5,7 @@ from freegames import square, vector
 
 print("Welcome!!")
 
+
 # inserting elements
 food = vector(0, 0)
 snake = [vector(10, 0)]
@@ -12,11 +13,10 @@ aim = vector(0, -10)
 
 #give background
 bk= turtle.Screen()
-bk.bgcolor("yellow")
+bk.bgcolor("pink")
 
-#2 axis therefore 2 parameters
+# aim.x and aim.y represents the axis
 def change(x, y):
-    "Change snake direction."
     #represents axis
     aim.x = x
     aim.y = y
@@ -25,16 +25,17 @@ def inside(head):
     "Return True if head inside boundaries."
     return -200 < head.x < 190 and -200 < head.y < 190
 
+#give movement to the snake
 def move():
-    "Move snake forward one segment."
     head = snake[-1].copy()
     head.move(aim)
 
     if not inside(head) or head in snake:
-        square(head.x, head.y, 9, 'red')
+        square(head.x, head.y, 9, 'blue')
         update()
         return
-
+    
+# an extra blue square button will get enable after above statements get satisfied
     snake.append(head)
 
     if head == food:
@@ -47,15 +48,17 @@ def move():
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, 'green')
+        square(body.x, body.y, 9, 'orange')
 
-    square(food.x, food.y, 9, 'red')
+    square(food.x, food.y, 9, 'blue')
     update()
     ontimer(move, 100)
 
 
 hideturtle()
+#brings element to intial state
 tracer(False)
+#updates game every second
 listen()
 onkey(lambda: change(10, 0), 'Right')
 onkey(lambda: change(-10, 0), 'Left')
